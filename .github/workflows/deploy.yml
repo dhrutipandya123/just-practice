@@ -1,0 +1,21 @@
+name: Deploy DevOpsLaunch Website
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy Website on EC2
+    runs-on: [self-hosted, linux, x64, devopslaunch]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Deploy Website
+        run: |
+          cp index.html /var/www/html/devopslaunch/index.html
+          echo "Website deployed successfully!"
